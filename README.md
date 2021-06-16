@@ -14,7 +14,7 @@ A simple bash wrapper for Percona's Xtrabackup utility.
 
 #### Usage
 
-`sh surrogate -<flag> <argument>`
+`bash surrogate -<flag> <argument>`
 
 - -h	Usage
 - -b	Performs a backup, either incremental or full depending on the argument you supply, for example: "surrogate -b full"

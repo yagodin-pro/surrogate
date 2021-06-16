@@ -38,8 +38,8 @@ prompt_user datadir 'Directory to store data' '/var/backups/db/percona'
 prompt_user confdir 'Directory to store configs' '/etc/surrogate'
 prompt_user libdir 'Directory to store libs' '/usr/local/lib/surrogate'
 prompt_user logdir 'Directory to store surrogate logs' '/var/log/surrogate' 
-prompt_user cron_h 'Hour to run full backups at' '4'
-prompt_user cron_m 'Minute to run full backups at' '15'
+###prompt_user cron_h 'Hour to run full backups at' '4'
+###prompt_user cron_m 'Minute to run full backups at' '15'
 prompt_user install_qpress 'Should qpress be installed? [Y/N]' 'N'
 
 # describe use
