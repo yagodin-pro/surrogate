@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# surrogate
+# a full backup function
 
 function perform_action() {
   instance=$1

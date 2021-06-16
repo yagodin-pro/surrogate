@@ -2,7 +2,7 @@
 # surrogate
 # installer
 
-# hey bro, are you root?
+# are you root?
 if [ "$(whoami)" != "root" ]; then
   if [ -f `which sudo` ]; then
     # no dude, need to sudo this ma
@@ -34,12 +34,12 @@ function prompt_user(){
 
 prompt_user mysql_user_system 'MySQL System User' 'mysql'
 prompt_user mysql_user_db 'MySQL Database User' 'root'
-prompt_user datadir 'Directory to store data' '/data'
+prompt_user datadir 'Directory to store data' '/var/backups/db/percona'
 prompt_user confdir 'Directory to store configs' '/etc/surrogate'
 prompt_user libdir 'Directory to store libs' '/usr/local/lib/surrogate'
 prompt_user logdir 'Directory to store surrogate logs' '/var/log/surrogate' 
-prompt_user cron_h 'Hour to run full backups at' '8'
-prompt_user cron_m 'Minute to run full backups at' '0'
+prompt_user cron_h 'Hour to run full backups at' '4'
+prompt_user cron_m 'Minute to run full backups at' '15'
 prompt_user install_qpress 'Should qpress be installed? [Y/N]' 'N'
 
 # describe use
@@ -96,20 +96,20 @@ fi
 
 ln -s /usr/local/lib/surrogate/surrogate /usr/local/bin/surrogate
 
-mkdir -p $datadir/backups/monthly
-mkdir -p $datadir/backups/weekly
-mkdir -p $datadir/backups/daily
-mkdir -p $datadir/backups/daily/{Mon,Tue,Wed,Thu,Fri,Sat,Sun}
+mkdir -p $datadir/monthly
+mkdir -p $datadir/weekly
+mkdir -p $datadir/daily
+mkdir -p $datadir/daily/{Mon,Tue,Wed,Thu,Fri,Sat,Sun}
 mkdir -p $datadir/log
 mkdir -p $datadir/tmp
 mkdir -p $logdir 
 chown -R $mysql_user_system:$mysql_user_system $datadir
-touch $datadir/backups/.digest
+touch $datadir/.digest
 
 case "$install_qpress" in
   [yY])
     echo installing qpress
-    wget http://www.quicklz.com/qpress-11-linux-x64.tar
+    curl -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)" http://www.quicklz.com/qpress-11-linux-x64.tar --output qpress-11-linux-x64.tar
     tar xf qpress-11-linux-x64.tar
     mv qpress /usr/local/bin/
     ;;
@@ -118,16 +118,14 @@ case "$install_qpress" in
     ;;
 esac
 
-echo adding cron entry
-(crontab -l ; echo "$cron_m $cron_h * * * /usr/local/bin/surrogate -b full") | sort - | uniq - | crontab -
+#Add a cron entry
+#(crontab -l ; echo "$cron_m $cron_h * * * /usr/local/bin/surrogate -b full") | sort - | uniq - | crontab -
 
 /bin/echo -ne "Installing Surrogate\t\t[##########] 100%\r"
 
 cat <<-EOF
 
 Installation complete!
-
-    "Bring back life form. Priority One. All other priorities rescinded."
 
     Make sure to update your MySQL credentials in $confdir/surrogate.conf
 

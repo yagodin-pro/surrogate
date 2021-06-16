@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # surrogate
-# incremental backup function
+# an incremental backup function
 
 function perform_action() {
   instance=$1

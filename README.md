@@ -2,8 +2,6 @@
 
 A simple bash wrapper for Percona's Xtrabackup utility.
 
-_Bring back life form. Priority One. All other priorities rescinded._
-
 ----
 
 ### Prerequisites
@@ -30,26 +28,20 @@ _Bring back life form. Priority One. All other priorities rescinded._
 Main configuration file
 - /etc/surrogate/surrogate.conf
 
-Xtrabackup tuning configuration (for future versions, not currently used)
-- /etc/surrogate/xtrabackup.conf
-
 #### Retention directory tree 
 
-    /data (customizable data directory)
-    |-- backups
-    |   |-- daily
-    |   |   |-- Fri
-    |   |   |-- Mon
-    |   |   |-- Sat
-    |   |   |-- Sun
-    |   |   |-- Thu
-    |   |   |-- Tue
-    |   |   `-- Wed
-    |   |-- monthly
-    |   `-- weekly
+    /var/backups/db/percona/ (customizable data directory)
+    |-- daily
+    |   |-- Fri
+    |   |-- Mon
+    |   |-- Sat
+    |   |-- Sun
+    |   |-- Thu
+    |   |-- Tue
+    |   `-- Wed
+    |-- monthly
+    |-- weekly
     |-- log
-    |   `-- bin
-    |-- mysql (or your my.cnf datadir)
     |-- tmp
 
 #### Default rotation policy (configurable in surrogate.conf)
@@ -62,6 +54,7 @@ Xtrabackup tuning configuration (for future versions, not currently used)
 
 - [Loren Carvalho](https://github.com/sixninetynine)
 - [Jesse R. Adams](https://github.com/jesseadams)
+- [Ivan Y.](https://github.com/yagodin-pro)
 
 #### License
 

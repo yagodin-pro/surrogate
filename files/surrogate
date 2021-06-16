@@ -1,6 +1,5 @@
 #!/bin/bash
 # surrogate
-# loren carvalho, 2012
 
 # explain the usage
 function usage() { 
@@ -46,7 +45,6 @@ fi
 
 # configs
 source /etc/surrogate/surrogate.conf
-source /etc/surrogate/xtrabackup.conf
 source /usr/local/lib/surrogate/lib/surrogate
 
 # empty vars on initial call, can reuse init() if needed
